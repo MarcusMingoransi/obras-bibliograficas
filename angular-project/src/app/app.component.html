@@ -1,33 +1,39 @@
 <form [formGroup]="form" (ngSubmit)="handleForm()">
   <div class="container">
     <div class="row">
-      <div class="col-md-10 col-sm-12">
+      <div class="col-12">
+        <h4 class="text-center">Obras Bibliográficas</h4>
+      </div>
+      <div class="col-md-10 col-sm-12 mb-3">
         <label for="numberName">Quantidade de Nomes</label>
         <input type="number" class="form-control" id="numberName" formControlName="numberNames">
-        <small class="form-text text-muted">Número de nomes inválido.</small>
+        <small *ngIf="!numberNamesIsValid(-1)" class="form-text text-danger">Número de nomes inválido.</small>
       </div>
-      <div class="col-md-2 col-sm-12">
-        <button class="btn btn-primary" (click)="addNames()">Adicionar</button>
+      <div class="col-md-2 col-sm-12 centerlize">
+        <button class="btn btn-primary" (click)="addNames()" [disabled]="!numberNamesIsValid(0) || controlNames.length">Adicionar</button>
       </div>
       <div class="col-12">
-        <div formArrayName="names" *ngFor="let item of form.get('names').controls; let i = index;">
+        <div class="input-names" formArrayName="names" *ngFor="let item of controlNames; let i = index;">
           <div [formGroupName]="i">
-            <input formControlName="name" placeholder="Nome">
+            <input class="form-control" formControlName="name" placeholder="Nome">
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Converter</button>
+      <div class="col-12 centerlize">
+        <button *ngIf="controlNames.length" type="submit" class="btn btn-primary" [disabled]="!form.valid">Formatar</button>
       </div>
     </div>
   </div>
 </form>
-<div class="container">
+<div class="container mt-3">
   <div class="row">
+    <div class="col-12" *ngIf="convertedNames.length">
+      <h4 class="text-center">Lista de nomes formatados</h4>
+    </div>
     <div class="col-12">
-      <div *ngFor="let item of convertedNames; let i = index;">
+      <div class="formated-lines" *ngFor="let item of convertedNames; let i = index;">
         {{ item }}
       </div>
     </div>

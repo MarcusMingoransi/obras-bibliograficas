@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  get controlNames() {
+    return this.form.get('names')['controls'];
+  }
+
   createItem(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required]
@@ -42,7 +46,6 @@ export class AppComponent implements OnInit {
 
   handleForm(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.convertedNames = this.form.get('names').value.map(el => {
         let nameSPlited = el.name.toLowerCase().split(' ');
         return this.handleName(nameSPlited);
@@ -52,34 +55,35 @@ export class AppComponent implements OnInit {
 
   handleName(arrayName: string[]): string {
     const name = arrayName.reduce((acc, element, index) => {
-      console.log(acc, element, index);
       if (arrayName.length === 1) { // Caso tenha apenas um nome informado
         return element.toUpperCase();
-      } else if (index === arrayName.length - 1) { // Caso último nome
+      } else if (index === arrayName.length - 1 && !this.validatePrepositions(element)) { // Caso último nome
         return `${element.toUpperCase()}, ${acc}`;
       } else if (index === arrayName.length - 2) { // Caso penultimo nome
         const lastName = arrayName[arrayName.length - 1];
-        if (this.validateLastName(lastName)) {
+        if (this.validateLastName(lastName) && arrayName.length !== 2) {
           arrayName[arrayName.length - 1] = `${element} ${lastName}`;
           return acc;
         }
       }
-      console.log(this.capitalize(element));
-      return acc += `${this.capitalize(element)} `;
+      return acc += `${this.validatePrepositions(element) ? element : this.capitalize(element)} `;
     }, '');
 
-    console.log(name);
     return name;
   }
 
+  numberNamesIsValid(numberRef): boolean {
+    return this.form.get('numberNames').value > numberRef;
+  }
+
   validateLastName(lastName: string): boolean {
-    return lastName.includes('filho') || lastName.includes('filha') || lastName.includes('neto') ||
-           lastName.includes('neta') || lastName.includes('sobrinho') ||
-           lastName.includes('sobrinha') || lastName.includes('junior');
+    return lastName === 'filho' || lastName === 'filha' || lastName === 'neto' ||
+           lastName === 'neta' || lastName === 'sobrinho' ||
+           lastName === 'sobrinha' || lastName === 'junior';
   }
 
   validatePrepositions(word: string): boolean {
-    return word.includes('da') || word.includes('de') || word.includes('do') || word.includes('das') || word.includes('dos');
+    return word === 'da' || word === 'de' || word === 'do' || word === 'das' || word === 'dos';
   }
 
   capitalize(word: string): string {
