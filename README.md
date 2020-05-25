@@ -1,5 +1,11 @@
 # Obras Bibliográficas
 
+# Como executar o projeto:
+* Em seu terminal execute o comando git clone https://github.com/MarcusMingoransi/obras-bibliograficas.git
+* Após concluido o download, ainda em seu terminal, execute o comando #cd angular-project
+* Execute o comando #npm install
+* Execute o comando #ng serve --open
+
 (LEIA ATÉ O FINAL)
 
 Quando se lista o nome de autores de livros, artigos e outras publicações é comum que se apresente o nome do autor ou dos autores da seguinte forma: sobrenome do autor em letras maiúsculas, seguido de uma vírgula e da primeira parte do nome apenas com as iniciais maiúsculas.
