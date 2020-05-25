@@ -1,10 +1,11 @@
-# Obras Bibliográficas
-
 # Como executar o projeto:
-* Em seu terminal execute o comando git clone https://github.com/MarcusMingoransi/obras-bibliograficas.git
-* Após concluido o download, ainda em seu terminal, execute o comando #cd angular-project
-* Execute o comando #npm install
-* Execute o comando #ng serve --open
+* Em seu terminal execute o comando: **git clone https://github.com/MarcusMingoransi/obras-bibliograficas.git
+* Após concluido o download, ainda em seu terminal, execute o comando: **cd angular-project
+* Execute o comando: **npm install
+* Execute o comando: **ng serve --open
+* Aguarde até que abra a página em seu naveador padrão.
+
+# Obras Bibliográficas
 
 (LEIA ATÉ O FINAL)
 
