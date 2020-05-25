@@ -5,6 +5,12 @@
 * Execute o comando: **ng serve --open**
 * Aguarde até que abra a página em seu naveador padrão.
 
+Configurações utilizadas para desenvolvimento
+* Angular CLI: 7.3.10
+* Node: 10.16.0
+* OS: win32 x64
+* Angular: 7.2.16
+
 # Obras Bibliográficas
 
 (LEIA ATÉ O FINAL)
