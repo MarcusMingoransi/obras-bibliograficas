@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="handleForm()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12">
+        <label for="numberName">Quantidade de Nomes</label>
+        <input type="number" class="form-control" id="numberName" formControlName="numberNames">
+        <small class="form-text text-muted">Número de nomes inválido.</small>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <button class="btn btn-primary" (click)="addNames()">Adicionar</button>
+      </div>
+      <div class="col-12">
+        <div formArrayName="names" *ngFor="let item of form.get('names').controls; let i = index;">
+          <div [formGroupName]="i">
+            <input formControlName="name" placeholder="Nome">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Converter</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngFor="let item of convertedNames; let i = index;">
+        {{ item }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
